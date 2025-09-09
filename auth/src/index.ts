@@ -1,12 +1,18 @@
 import express from 'express'
 
-const app = express()
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+import { currentUserRouter } from './routes/current-user'
+import { signinRouter } from './routes/signin'
+import { signoutRouter } from './routes/signout'
+import { signupRouter } from './routes/signup'
 
-app.get('/api/users/currentuser', (req, res) => {
-  res.send('Hi there!')
-})
+const app = express()
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+app.use(currentUserRouter)
+app.use(signinRouter)
+app.use(signoutRouter)
+app.use(signupRouter)
 
 app.listen(3000, () => {
   console.log('Listening on port 3000')
